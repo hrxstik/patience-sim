@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+  p {
+    @apply uppercase font-bold;
+  }
+}
+@layer components {
+  .holdButton {
+    @apply button p-10 w-1/4
+    absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+    transition-all duration-300 min-w-fit;
+  }
+  .isHolded {
+    @apply reversed transition-all duration-300;
+  }
+  .musicPlayer {
+    @apply button;
+  }
+}
+@layer utilities {
+  .button {
+    @apply border-white border-4 bg-white text-black cursor-pointer select-none
+    grid place-items-center
+    uppercase font-bold;
+  }
+  .corner {
+    @apply fixed bottom-0 left-0 pb-2 pl-2;
+  }
+  .reversed {
+    @apply bg-black text-white;
+  }
+}

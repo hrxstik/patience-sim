@@ -1,5 +1,3 @@
 # Patience simulator
 
-Stack: ReactJS, TS, JSDoc, tailwind
-
-Четвертая работа с tailwind
+Stack: ReactJS, TS, JSDoc, tailwind, Material UI
