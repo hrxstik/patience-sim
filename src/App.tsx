@@ -2,6 +2,7 @@ import React from 'react';
 import HoldButton from './components/HoldButton';
 import MusicPlayer from './components/MusicPlayer';
 import Stats from './components/Stats';
+import LeaderBoard from './components/LeaderBoard';
 
 interface RecordContextType {
   record: number;
@@ -13,19 +14,20 @@ export const RecordContext = React.createContext<RecordContextType>({
   setRecord: () => {},
 });
 
-function App() {
+const App: React.FC = () => {
   const [record, setRecord] = React.useState(0);
   return (
     <div className="App">
       <RecordContext.Provider value={{ record, setRecord }}>
         <HoldButton />
-        <div className="corner">
+        <div className="left-bottom-corner">
           <Stats />
           <MusicPlayer />
         </div>
+        <LeaderBoard />
       </RecordContext.Provider>
     </div>
   );
-}
+};
 
 export default App;

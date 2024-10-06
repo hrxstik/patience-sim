@@ -6,7 +6,8 @@
   body {
     @apply bg-black text-white;
   }
-  p {
+  p,
+  h2 {
     @apply uppercase font-bold;
   }
 }
@@ -29,8 +30,11 @@
     grid place-items-center
     uppercase font-bold;
   }
-  .corner {
+  .left-bottom-corner {
     @apply fixed bottom-0 left-0 pb-2 pl-2;
+  }
+  .right-top-corner {
+    @apply fixed top-0 right-0 pt-2 pr-2;
   }
   .reversed {
     @apply bg-black text-white;

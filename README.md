@@ -1,3 +1,3 @@
 # Patience simulator
 
-Stack: ReactJS, TS, JSDoc, tailwind, Material UI
+Stack: ReactJS, TS, Redux, JSDoc, tailwind, Material UI, react-cookie, axios
