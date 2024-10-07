@@ -1,11 +1,12 @@
 import React from 'react';
 import VolumeSlider from './VolumeSlider';
 
+/** */
 const MusicPlayer = () => {
   const audioRef = React.useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
-  const [volume, setVolume] = React.useState<number>(0.3);
+  const [isPlaying, setIsPlaying] = React.useState(false);
 
+  /** */
   const playAudio = () => {
     const audio = audioRef.current;
     if (audio && !isPlaying) {
@@ -15,14 +16,6 @@ const MusicPlayer = () => {
       audio.pause();
       audio.currentTime = 0;
       setIsPlaying(false);
-    }
-  };
-
-  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = Number(event.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
     }
   };
 

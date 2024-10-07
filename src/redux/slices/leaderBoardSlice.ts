@@ -2,35 +2,53 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../store';
 
+/** */
 export type TLeader = {
   id: string;
   name: string;
   score: number;
 };
 
+/** */
 export enum Status {
   PENDING = 'pending',
   SUCCESS = 'success',
   ERROR = 'error',
 }
 
+/** */
 interface ILeaderBoardState {
   leaders: TLeader[];
   status: Status;
 }
 
+/** */
 const initialState: ILeaderBoardState = {
   leaders: [],
   status: Status.PENDING,
 };
 
+/** */
 export const fetchLeaders = createAsyncThunk<TLeader[]>('leaders/fetchLeaders', async () => {
-  const { data } = await axios.post<TLeader[]>(
-    `https://66bc4f4f24da2de7ff69f4a8.mockapi.io/leaders?sortBy=score&order=desc`,
+  const { data } = await axios.get<TLeader[]>(
+    `https://66bc4f4f24da2de7ff69f4a8.mockapi.io/leaders?&sortBy=score&order=desc`,
   );
   return data;
 });
 
+/** */
+export const addLeader = createAsyncThunk<TLeader, TLeader>(
+  'leaders/addLeader',
+  async (newLeader) => {
+    const { data } = await axios.post<TLeader>(
+      `https://66bc4f4f24da2de7ff69f4a8.mockapi.io/leaders`,
+      newLeader,
+    );
+    return data;
+  },
+);
+
+/** */
 export const leaderBoardSlice = createSlice({
   name: 'leaderBoard',
   initialState,
@@ -56,6 +74,8 @@ export const leaderBoardSlice = createSlice({
       });
   },
 });
+
+/** */
 export const selectLeaderBoardSlice = (state: RootState) => state.leaderBoard;
 
 export const { setLeaders } = leaderBoardSlice.actions;
