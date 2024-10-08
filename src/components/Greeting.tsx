@@ -14,6 +14,7 @@ const Greeting = () => {
     setStart(isUserNameValid);
   };
 
+  //Switch from greeting to game
   React.useEffect(() => {
     if (recordContext.userName && start) {
       recordContext.setIsUserNameSet(true);
