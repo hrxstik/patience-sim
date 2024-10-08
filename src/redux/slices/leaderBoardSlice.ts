@@ -66,7 +66,6 @@ export const leaderBoardSlice = createSlice({
       .addCase(fetchLeaders.fulfilled, (state, action) => {
         state.status = Status.SUCCESS;
         state.leaders = action.payload;
-        console.log(state.leaders);
       })
       .addCase(fetchLeaders.rejected, (state) => {
         state.status = Status.ERROR;

@@ -10,7 +10,7 @@ const LeaderBoard = () => {
 
   React.useEffect(() => {
     dispatch(fetchLeaders());
-  }, []);
+  }, [dispatch]);
 
   /** Nodelist of 10 or less JSX <p> elements. People with highest score.*/
   const leadersList = leaders.map((leader: TLeader, index: number) => {

@@ -17,7 +17,7 @@ interface RecordContextType {
 
 /** */
 export const RecordContext = React.createContext<RecordContextType>({
-  userName: 'Player',
+  userName: '',
   isUserNameSet: false,
   record: 0,
   setRecord: () => {},
@@ -27,7 +27,7 @@ export const RecordContext = React.createContext<RecordContextType>({
 
 const App: React.FC = () => {
   const [record, setRecord] = React.useState(0);
-  const [userName, setUserName] = React.useState('Player');
+  const [userName, setUserName] = React.useState('');
   const [isUserNameSet, setIsUserNameSet] = React.useState(false);
   return (
     <div className="App">

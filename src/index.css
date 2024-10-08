@@ -7,14 +7,21 @@
     @apply bg-black text-white;
   }
   p,
-  h2 {
+  h2,
+  h1 {
     @apply uppercase font-bold;
+  }
+  .button,
+  input {
+    @apply border-white border-4 bg-white text-black cursor-pointer select-none
+    grid place-items-center
+    uppercase font-bold;
   }
 }
 @layer components {
   .holdButton {
     @apply button p-10 w-200
-    absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+    center
     transition-all duration-300 min-w-fit;
   }
   .isHolded {
@@ -23,14 +30,11 @@
   .musicPlayer {
     @apply button;
   }
+  .greeting {
+    @apply center flex flex-col gap-2;
+  }
 }
 @layer utilities {
-  .button,
-  input {
-    @apply border-white border-4 bg-white text-black cursor-pointer select-none
-    grid place-items-center
-    uppercase font-bold;
-  }
   .left-bottom-corner {
     @apply fixed bottom-0 left-0 pb-2 pl-2;
   }
@@ -39,5 +43,8 @@
   }
   .reversed {
     @apply bg-black text-white;
+  }
+  .center {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 }
