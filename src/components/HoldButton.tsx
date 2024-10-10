@@ -8,6 +8,7 @@ import {
 } from '../redux/slices/leaderBoardSlice';
 import { useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 /** */
 const HoldButton: React.FC = () => {
@@ -16,6 +17,7 @@ const HoldButton: React.FC = () => {
   const intervalId = React.useRef<NodeJS.Timeout | null>(null);
   const recordContext = React.useContext(RecordContext);
   const { leaders } = useSelector(selectLeaderBoardSlice);
+  const [cookies, setCookie] = useCookies();
   const dispatch = useAppDispatch();
   /** */
   function startTimer() {
@@ -36,13 +38,15 @@ const HoldButton: React.FC = () => {
       const currentTimerValue = parseFloat(timer.toFixed(2));
 
       if (currentTimerValue > recordContext.record) {
-        recordContext.setRecord(currentTimerValue);
+        setCookie('record', currentTimerValue, { path: '/' });
+        recordContext.setRecord(cookies['record']);
         updateLeaderBoard(currentTimerValue);
       } else {
         recordContext.setRecord(recordContext.record);
       }
     }
   }
+
   /** */
   function updateLeaderBoard(currentScore: number) {
     const newLeader: TLeader = {

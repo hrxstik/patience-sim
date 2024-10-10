@@ -1,6 +1,8 @@
 import React from 'react';
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
+import { useCookies } from 'react-cookie';
+import Cookies from '../cookies';
 
 /** */
 const CustomSlider = styled(Slider)({
@@ -31,18 +33,25 @@ const CustomSlider = styled(Slider)({
 const VolumeSlider: React.FC<{
   audioRef: React.MutableRefObject<HTMLAudioElement | null>;
 }> = ({ audioRef }) => {
-  const [value, setValue] = React.useState<number>(0.3);
+  const [cookies, setCookie] = useCookies<string>(['music-volume']);
+  const [value, setValue] = React.useState<number>(
+    cookies['music-volume'] ? parseFloat(cookies['music-volume']) : 0.3,
+  );
 
   /** */
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number);
     if (audioRef.current) {
       audioRef.current.volume = newValue as number;
+      setCookie('music-volume', newValue.toString(), { path: '/' });
     }
   };
 
   React.useEffect(() => {
-    handleChange(new Event(''), 0.3);
+    handleChange(
+      new Event(''),
+      cookies['music-volume'] ? parseFloat(cookies['music-volume']) : 0.3,
+    );
   }, []);
 
   return (

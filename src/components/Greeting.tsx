@@ -1,27 +1,30 @@
 import React from 'react';
 import { RecordContext } from '../App';
+import { useCookies } from 'react-cookie';
+
 const Greeting = () => {
   const recordContext = React.useContext(RecordContext);
-  const [start, setStart] = React.useState(false);
+  const [cookies, setCookie] = useCookies(['player-name']);
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     recordContext.setUserName(event.target.value);
   };
 
   const startGame = () => {
-    const isUserNameValid = recordContext.userName !== '';
-    recordContext.setIsUserNameSet(isUserNameValid);
-    setStart(isUserNameValid);
+    const isUserNameValid = recordContext.userName.trim() !== '';
+    if (isUserNameValid) {
+      recordContext.setIsUserNameSet(true);
+      setCookie('player-name', recordContext.userName, { path: '/' });
+    }
   };
 
   //Switch from greeting to game
   React.useEffect(() => {
-    if (recordContext.userName && start) {
+    if (cookies['player-name'] || recordContext.isUserNameSet) {
+      recordContext.setUserName(cookies['player-name']);
       recordContext.setIsUserNameSet(true);
-    } else {
-      recordContext.setIsUserNameSet(false);
     }
-  }, [recordContext.userName]);
+  }, [cookies, recordContext]);
 
   return (
     <div className="greeting">

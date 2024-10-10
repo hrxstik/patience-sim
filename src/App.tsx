@@ -4,6 +4,7 @@ import MusicPlayer from './components/MusicPlayer';
 import Stats from './components/Stats';
 import LeaderBoard from './components/LeaderBoard';
 import Greeting from './components/Greeting';
+import { useCookies } from 'react-cookie';
 
 /** */
 interface RecordContextType {
@@ -29,10 +30,29 @@ const App: React.FC = () => {
   const [record, setRecord] = React.useState(0);
   const [userName, setUserName] = React.useState('');
   const [isUserNameSet, setIsUserNameSet] = React.useState(false);
+  const [cookies] = useCookies();
+
+  React.useEffect(() => {
+    if (cookies['player-name']) {
+      setUserName(cookies['player-name']);
+      setIsUserNameSet(true);
+    }
+    if (cookies['record']) {
+      setRecord(cookies['record']);
+    }
+  }, [cookies]);
+
   return (
     <div className="App">
       <RecordContext.Provider
-        value={{ userName, isUserNameSet, record, setRecord, setUserName, setIsUserNameSet }}>
+        value={{
+          userName,
+          isUserNameSet,
+          record: record,
+          setRecord,
+          setUserName,
+          setIsUserNameSet,
+        }}>
         {!isUserNameSet ? (
           <Greeting />
         ) : (
