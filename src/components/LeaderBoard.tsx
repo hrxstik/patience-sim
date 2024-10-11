@@ -1,18 +1,21 @@
 import React from 'react';
 import { useAppDispatch } from '../redux/store';
-import { TLeader, fetchLeaders, selectLeaderBoardSlice } from '../redux/slices/leaderBoardSlice';
+import { TLeader, getLeaders, selectLeaderBoardSlice } from '../redux/slices/leaderBoardSlice';
 import { useSelector } from 'react-redux';
 
-/** */
+/** Displays 10 players with highest score sorted in descending order.
+ *
+ * @slice leaderBoardSlice
+ * @component
+ */
 const LeaderBoard = () => {
   const dispatch = useAppDispatch();
   const { leaders } = useSelector(selectLeaderBoardSlice);
 
   React.useEffect(() => {
-    dispatch(fetchLeaders());
+    dispatch(getLeaders());
   }, []);
 
-  /** Nodelist of 10 or less JSX <p> elements. People with highest score.*/
   const leadersList = leaders.map((leader: TLeader, index: number) => {
     if (index < 10) {
       return (

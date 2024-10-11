@@ -6,8 +6,7 @@ import LeaderBoard from './components/LeaderBoard';
 import Greeting from './components/Greeting';
 import { useCookies } from 'react-cookie';
 
-/** */
-interface RecordContextType {
+interface IRecordContext {
   userName: string;
   isUserNameSet: boolean;
   record: number;
@@ -16,8 +15,8 @@ interface RecordContextType {
   setIsUserNameSet: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-/** */
-export const RecordContext = React.createContext<RecordContextType>({
+/** Player's context. */
+export const RecordContext = React.createContext<IRecordContext>({
   userName: '',
   isUserNameSet: false,
   record: 0,

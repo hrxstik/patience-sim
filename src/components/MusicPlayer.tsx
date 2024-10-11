@@ -1,12 +1,13 @@
 import React from 'react';
 import VolumeSlider from './VolumeSlider';
 
-/** */
+/** Displays music controllers.
+ * @component
+ */
 const MusicPlayer = () => {
   const audioRef = React.useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  /** */
   const playAudio = () => {
     const audio = audioRef.current;
     if (audio && !isPlaying) {
@@ -27,7 +28,7 @@ const MusicPlayer = () => {
       <p>Volume</p>
       <VolumeSlider audioRef={audioRef} />
       <div className={`musicPlayer ${isPlaying ? 'reversed' : ''}`} onClick={() => playAudio()}>
-        Music On
+        Music {isPlaying ? 'Off' : 'On'}
       </div>
     </div>
   );

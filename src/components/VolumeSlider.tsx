@@ -2,9 +2,9 @@ import React from 'react';
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { useCookies } from 'react-cookie';
-import Cookies from '../cookies';
+import ICookies from '../cookies';
 
-/** */
+/** "Retro" slider. */
 const CustomSlider = styled(Slider)({
   '& .MuiSlider-thumb': {
     height: 16,
@@ -29,7 +29,11 @@ const CustomSlider = styled(Slider)({
   },
 });
 
-/** */
+/** Changes music volume.
+ * @param audioRef An HTMLAudioElement from MusicPlayer.
+ * @extends MusicPlayer
+ * @component
+ */
 const VolumeSlider: React.FC<{
   audioRef: React.MutableRefObject<HTMLAudioElement | null>;
 }> = ({ audioRef }) => {
@@ -38,7 +42,6 @@ const VolumeSlider: React.FC<{
     cookies['music-volume'] ? parseFloat(cookies['music-volume']) : 0.3,
   );
 
-  /** */
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number);
     if (audioRef.current) {

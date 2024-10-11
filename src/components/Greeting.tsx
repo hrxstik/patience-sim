@@ -2,6 +2,11 @@ import React from 'react';
 import { RecordContext } from '../App';
 import { useCookies } from 'react-cookie';
 
+/**Greeting window.
+ *
+ * Player has to set a name here to start the game.
+ * @component
+ */
 const Greeting = () => {
   const recordContext = React.useContext(RecordContext);
   const [cookies, setCookie] = useCookies(['player-name']);

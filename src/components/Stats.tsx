@@ -1,7 +1,9 @@
 import React from 'react';
 import { RecordContext } from '../App';
 
-/** */
+/** Displays current player's name and high score.
+ * @component
+ */
 const Stats = () => {
   const recordContext = React.useContext(RecordContext);
   return (
